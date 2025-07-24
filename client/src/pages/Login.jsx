@@ -66,8 +66,8 @@ const Login = () => {
     setError("");
 
     const url = isLoginView
-      ? "http://localhost:5000/api/auth/login"
-      : "http://localhost:5000/api/auth/register";
+      ? `${import.meta.env.VITE_API_URL}/api/auth/login`
+      : `${import.meta.env.VITE_API_URL}/api/auth/register`;
 
     try {
       const { data } = await axios.post(url, formData);
@@ -85,7 +85,7 @@ const Login = () => {
     setError("");
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/google",
+        `${import.meta.env.VITE_API_URL}/api/auth/google`,
         {
           credential: credentialResponse.credential,
         }

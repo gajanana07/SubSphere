@@ -92,7 +92,7 @@ const DashboardPage = () => {
         // Update this single subscription on the backend
         try {
           await axios.put(
-            `http://localhost:5000/api/subscriptions/${sub._id}`,
+            `${import.meta.env.VITE_API_URL}/api/subscriptions/${sub._id}`,
             { nextBillDate: sub.nextBillDate },
             createApiConfig(token)
           );
@@ -116,7 +116,7 @@ const DashboardPage = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        "http://localhost:5000/api/subscriptions",
+        `${import.meta.env.VITE_API_URL}/api/subscriptions`,
         createApiConfig(token)
       );
       // Process dates and sort before setting state
@@ -144,13 +144,13 @@ const DashboardPage = () => {
       let response;
       if (subId) {
         response = await axios.put(
-          `http://localhost:5000/api/subscriptions/${subId}`,
+          `${import.meta.env.VITE_API_URL}/api/subscriptions/${subId}`,
           subData,
           config
         );
       } else {
         response = await axios.post(
-          "http://localhost:5000/api/subscriptions",
+          `${import.meta.env.VITE_API_URL}/api/subscriptions`,
           subData,
           config
         );
@@ -166,7 +166,7 @@ const DashboardPage = () => {
     try {
       const config = createApiConfig(userInfo.token);
       const { data } = await axios.delete(
-        `http://localhost:5000/api/subscriptions/${subToDelete._id}`,
+        `${import.meta.env.VITE_API_URL}/api/subscriptions/${subToDelete._id}`,
         config
       );
       // Process and sort the updated list
