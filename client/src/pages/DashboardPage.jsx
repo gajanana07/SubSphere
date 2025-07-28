@@ -243,7 +243,8 @@ const DashboardPage = () => {
         onConfirm={handleDeleteConfirm}
         subscriptionName={subToDelete?.serviceName}
       />
-      <div className="max-w-4xl mx-auto px-6 py-8 bg-black/40 backdrop-blur-md rounded-2xl shadow-lg">
+
+      <div className="max-w-4xl mx-auto my-8 px-6 py-8 bg-neutral-950/80 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] backdrop-blur-md rounded-2xl shadow-lg">
         <h1 className="text-3xl font-bold text-white mb-6">
           Welcome, {userInfo?.name}!
         </h1>

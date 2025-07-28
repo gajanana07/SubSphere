@@ -17,10 +17,17 @@ import sign from "./assets/name.png";
 
 const Layout = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-[#080a11]">
+    <div className="relative flex flex-col min-h-screen bg-[#080a11]">
       <Navbar />
-      <main className="flex-grow text-white">
-        <Outlet />
+
+      <main className="relative flex-grow text-white">
+        {/* Background Layer */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] pointer-events-none" />
+
+        {/* Page Content */}
+        <div className="relative z-10">
+          <Outlet />
+        </div>
       </main>
       <Footer />
     </div>
@@ -29,8 +36,8 @@ const Layout = () => {
 
 const AboutPage = () => (
   <div className="text-white flex flex-col items-center justify-center flex-grow p-4 md:p-8 text-center">
-    <div className=" bg-black/80 backdrop-blur-md rounded-2xl  shadow-lg max-w-4xl w-full">
-      <h1 className="text-4xl font-bold mb-6 mt-7">Behind SubSphere</h1>
+    <div className=" bg-neutral-950/80 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] rounded-2xl shadow-lg max-w-4xl w-full">
+      <h1 className="text-4xl font-bold mb-6 mt-7 ">Behind SubSphere</h1>
 
       <img
         src={img}
@@ -56,7 +63,6 @@ const AboutPage = () => (
           inspiration for creating SubSphere: an easy, clean way to regain
           control over repeating bills.
         </p>
-        <img src={sign} alt="name" className="w-90 mx-auto mt-4" />
       </div>
     </div>
   </div>
