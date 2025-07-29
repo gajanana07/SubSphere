@@ -250,7 +250,7 @@ const DashboardPage = () => {
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div className="bg-[#1e2025] p-6 rounded-lg shadow-lg border border-blue-500">
-            <h2 className="text-slate-400 text-lg mb-2">Cost This Month</h2>
+            <h2 className="text-slate-400 text-lg mb-2">Monthly Expense</h2>
             <p className="text-4xl font-bold text-white">₹{totalMonthlyCost}</p>
           </div>
           <div className="bg-[#1e2025] p-6 rounded-lg shadow-lg border border-blue-500">
@@ -318,7 +318,7 @@ const DashboardPage = () => {
               className="flex items-center space-x-2 bg-blue-600 text-white font-semibold py-2 px-6 rounded-md hover:bg-blue-700 transition-colors"
             >
               <PlusIcon />
-              <span>Add New Subscription</span>
+              <span>Add Subscription</span>
             </button>
           </div>
         </div>

@@ -60,14 +60,14 @@ const Navbar = () => {
     <nav className="bg-[#1f2229] text-white shadow-md">
       <div className="container mx-auto px-6 py-3 flex justify-between items-center">
         {/* Left Side*/}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1">
           <img
             src={weblogo}
             alt="Logo Illustration"
             className="w-10 h-10 rounded-lg"
           />
           <Link
-            to="/"
+            to="/dashboard"
             className="text-2xl font-bold text-white hover:text-blue-400 transition-colors"
           >
             SubSphere
@@ -75,7 +75,7 @@ const Navbar = () => {
         </div>
 
         {/* Right Side*/}
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center gap-4">
           <NavLink
             to="/about"
             className={({ isActive }) =>

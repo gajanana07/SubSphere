@@ -12,7 +12,10 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="bg-[#080a11] font-sans text-white min-h-screen flex items-center">
+    <div
+      className="bg-[#080a11] bg-[radial-gradient(#222222_1px,#080a11_1px)] 
+  bg-[size:20px_20px] font-sans text-white min-h-screen flex items-center"
+    >
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl mx-auto">
           {/* Left Column*/}

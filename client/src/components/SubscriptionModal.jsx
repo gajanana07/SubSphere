@@ -67,10 +67,10 @@ const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+    <div className="fixed inset-0 backdrop-blur-[3px] flex items-center justify-center z-50 ">
       <div className="bg-[#1e2025] p-8 rounded-lg shadow-2xl w-full max-w-md">
         <h2 className="text-2xl font-bold text-white mb-6">
-          {isEditMode ? "Edit" : "Add New"} Subscription
+          {isEditMode ? "Edit" : "Add"} Subscription
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -86,7 +86,7 @@ const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
               value={formData.serviceName}
               onChange={handleInputChange}
               required
-              className="bg-slate-700 border border-slate-600 rounded-md w-full py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-slate-700 border border-slate-600 rounded-full w-full py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div className="mb-4">
@@ -102,7 +102,7 @@ const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
               value={formData.monthlyCost}
               onChange={handleInputChange}
               required
-              className="bg-slate-700 border border-slate-600 rounded-md w-full py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-slate-700 border border-slate-600 rounded-full w-full py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div className="mb-4">
@@ -110,7 +110,7 @@ const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
               className="block text-slate-300 text-sm font-bold mb-2"
               htmlFor="nextBillDate"
             >
-              Next Bill Date
+              Bill Date
             </label>
             <input
               name="nextBillDate"
@@ -118,7 +118,7 @@ const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
               value={formData.nextBillDate}
               onChange={handleInputChange}
               required
-              className="bg-slate-700 border border-slate-600 rounded-md w-full py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-slate-700 border border-slate-600 rounded-full w-full py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -130,7 +130,7 @@ const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
               name="iconId"
               value={formData.iconId}
               onChange={handleInputChange}
-              className="bg-slate-700 border border-slate-600 rounded-md w-full py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-slate-700 border border-slate-600 rounded-full w-full py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               {Object.entries(serviceIcons).map(([id, { name }]) => (
                 <option key={id} value={id}>
@@ -143,12 +143,12 @@ const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
           {/* Google Calendar */}
           <div className="mb-6">
             <label className="block text-slate-300 text-sm font-bold mb-2">
-              Reminder
+              Create a Reminder
             </label>
             <button
               type="button"
               onClick={handleAddToCalendar}
-              className="w-full flex justify-center items-center space-x-2 bg-slate-700 text-white font-semibold py-3 px-4 rounded-md hover:bg-slate-600 transition-colors"
+              className="w-full flex justify-center items-center space-x-2 bg-slate-700 text-white font-semibold py-3 px-4 rounded-full hover:bg-slate-600 transition-colors"
             >
               <img
                 src={calender_logo}

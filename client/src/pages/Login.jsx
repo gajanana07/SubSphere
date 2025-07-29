@@ -1,8 +1,26 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import weblogo from "../assets/web_logo.png";
 import axios from "axios";
+
+const UserIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-6 w-6 text-slate-400 hover:text-white transition-colors"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z"
+    />
+  </svg>
+);
 
 const EmailIcon = () => (
   <svg
@@ -98,16 +116,21 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-[#080a11] font-sans text-white min-h-screen flex items-center justify-center p-4">
+    <div
+      className="bg-[#080a11] bg-[radial-gradient(#222222_1px,#080a11_1px)] 
+  bg-[size:20px_20px] font-sans text-white min-h-screen flex items-center justify-center p-4"
+    >
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <img
-            src={weblogo}
-            alt="Logo Illustration"
-            className="mx-auto w-20 h-20 rounded-lg"
-          />
+          <Link to="/" className="">
+            <img
+              src={weblogo}
+              alt="Logo Illustration"
+              className="mx-auto w-20 h-20 rounded-lg"
+            />
+          </Link>
           <h1 className="text-4xl font-bold mb-2">
-            {isLoginView ? "Welcome Back!" : "Create Account"}
+            {isLoginView ? "Hey, Welcome Back!" : "Create Account"}
           </h1>
           <p className="text-slate-400">
             {isLoginView
@@ -131,14 +154,20 @@ const Login = () => {
                 >
                   Name
                 </label>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=""
-                  onChange={handleInputChange}
-                  required
-                  className="bg-slate-700 border border-slate-600 rounded-md w-full py-3 px-4 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <UserIcon />
+                  </div>
+
+                  <input
+                    name="name"
+                    type="text"
+                    placeholder=""
+                    onChange={handleInputChange}
+                    required
+                    className="bg-slate-700 border border-slate-600 rounded-md w-full py-3 pl-10 pr-4 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
               </div>
             )}
             <div className="mb-4">
@@ -155,7 +184,7 @@ const Login = () => {
                 <input
                   name="email"
                   type="email"
-                  placeholder="example@gmail.com"
+                  placeholder=""
                   onChange={handleInputChange}
                   required
                   className="bg-slate-700 border border-slate-600 rounded-md w-full py-3 pl-10 pr-4 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -176,7 +205,7 @@ const Login = () => {
                 <input
                   name="password"
                   type="password"
-                  placeholder="***********"
+                  placeholder=""
                   onChange={handleInputChange}
                   required
                   className="bg-slate-700 border border-slate-600 rounded-md w-full py-3 pl-10 pr-4 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -188,7 +217,7 @@ const Login = () => {
                 type="submit"
                 className="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-md hover:bg-blue-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                {isLoginView ? "Sign In" : "Create Account"}
+                {isLoginView ? "Log In" : "Create Account"}
               </button>
             </div>
           </form>
@@ -224,7 +253,7 @@ const Login = () => {
               }}
               className="font-semibold text-blue-500 hover:text-blue-400 ml-2"
             >
-              {isLoginView ? "Sign Up" : "Sign In"}
+              {isLoginView ? "Sign Up" : "Log In"}
             </button>
           </p>
         </div>
