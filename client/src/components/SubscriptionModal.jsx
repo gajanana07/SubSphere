@@ -11,6 +11,8 @@ const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
   });
   const [calendarReminderSet, setCalendarReminderSet] = useState(false);
 
+  const [isOtherService, setIsOtherService] = useState(false);
+
   const isEditMode = Boolean(subToEdit);
 
   useEffect(() => {
@@ -24,6 +26,11 @@ const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
         iconId: subToEdit.iconId || "default",
       });
       setCalendarReminderSet(subToEdit.calendarReminderSet);
+      setIsOtherService(
+        !Object.values(serviceIcons).some(
+          (s) => s.name === subToEdit.serviceName
+        )
+      );
     } else {
       setFormData({
         serviceName: "",
@@ -32,8 +39,36 @@ const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
         iconId: "default",
       });
       setCalendarReminderSet(false);
+      setIsOtherService(false);
     }
   }, [isOpen, subToEdit, isEditMode]);
+
+  // Handle service name change
+  const handleServiceChange = (e) => {
+    const selectedService = e.target.value;
+
+    if (selectedService === "Other") {
+      setIsOtherService(true);
+      setFormData({
+        ...formData,
+        serviceName: "",
+        iconId: "default",
+      });
+    } else {
+      setIsOtherService(false);
+
+      const matchedEntry = Object.entries(serviceIcons).find(
+        ([, { name }]) =>
+          name.trim().toLowerCase() === selectedService.trim().toLowerCase()
+      );
+
+      setFormData({
+        ...formData,
+        serviceName: selectedService,
+        iconId: matchedEntry ? matchedEntry[0] : "default",
+      });
+    }
+  };
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -73,22 +108,57 @@ const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
           {isEditMode ? "Edit" : "Add"} Subscription
         </h2>
         <form onSubmit={handleSubmit}>
+          {/* Service name dropdown */}
           <div className="mb-4">
             <label
               className="block text-slate-300 text-sm font-bold mb-2"
               htmlFor="serviceName"
             >
-              Service Name
+              Service
             </label>
-            <input
-              name="serviceName"
-              type="text"
-              value={formData.serviceName}
-              onChange={handleInputChange}
+            <select
+              value={
+                isOtherService ? "Other" : formData.serviceName || "" // Blank on add
+              }
+              onChange={handleServiceChange}
               required
               className="bg-slate-700 border border-slate-600 rounded-full w-full py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            >
+              <option value="" disabled>
+                -- Select a Service --
+              </option>
+
+              {Object.values(serviceIcons)
+                .filter(({ name }) => name.toLowerCase() !== "default")
+                .map(({ name }) => (
+                  <option key={name} value={name}>
+                    {name}
+                  </option>
+                ))}
+              <option value="Other">Other</option>
+            </select>
           </div>
+
+          {/* Show text input if Other is selected */}
+          {isOtherService && (
+            <div className="mb-4">
+              <label
+                className="block text-slate-300 text-sm font-bold mb-2"
+                htmlFor="customServiceName"
+              >
+                Enter Service Name
+              </label>
+              <input
+                name="serviceName"
+                type="text"
+                value={formData.serviceName}
+                onChange={handleInputChange}
+                required
+                className="bg-slate-700 border border-slate-600 rounded-full w-full py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          )}
+
           <div className="mb-4">
             <label
               className="block text-slate-300 text-sm font-bold mb-2"
@@ -105,6 +175,7 @@ const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
               className="bg-slate-700 border border-slate-600 rounded-full w-full py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
           <div className="mb-4">
             <label
               className="block text-slate-300 text-sm font-bold mb-2"
@@ -116,28 +187,11 @@ const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
               name="nextBillDate"
               type="date"
               value={formData.nextBillDate}
+              min={new Date().toISOString().split("T")[0]}
               onChange={handleInputChange}
               required
               className="bg-slate-700 border border-slate-600 rounded-full w-full py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-slate-300 text-sm font-bold mb-2">
-              Icon
-            </label>
-            <select
-              name="iconId"
-              value={formData.iconId}
-              onChange={handleInputChange}
-              className="bg-slate-700 border border-slate-600 rounded-full w-full py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {Object.entries(serviceIcons).map(([id, { name }]) => (
-                <option key={id} value={id}>
-                  {name}
-                </option>
-              ))}
-            </select>
           </div>
 
           {/* Google Calendar */}

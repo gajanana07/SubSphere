@@ -109,7 +109,24 @@ const DashboardPage = () => {
       (a, b) => new Date(a.nextBillDate) - new Date(b.nextBillDate)
     );
 
+    // ✅ Directly set updated list so upcoming bills calculation uses fresh dates
     setSubscriptions(processedSubs);
+
+    // ✅ If any date was updated, fetch fresh list from backend so counts are 100% accurate
+    if (needsUpdate) {
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/subscriptions`,
+          createApiConfig(token)
+        );
+        data.sort(
+          (a, b) => new Date(a.nextBillDate) - new Date(b.nextBillDate)
+        );
+        setSubscriptions(data);
+      } catch (err) {
+        console.error("Failed to refresh subscriptions after date update");
+      }
+    }
   };
 
   const fetchSubscriptions = async (token) => {
@@ -209,12 +226,14 @@ const DashboardPage = () => {
 
   const calculateUpcomingBills = () => {
     const today = new Date();
-    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
     today.setHours(0, 0, 0, 0);
+
+    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    endOfMonth.setHours(23, 59, 59, 999);
 
     return subscriptions.filter((sub) => {
       const billDate = new Date(sub.nextBillDate);
-      billDate.setUTCHours(0, 0, 0, 0);
+      billDate.setHours(0, 0, 0, 0);
       return billDate >= today && billDate <= endOfMonth;
     }).length;
   };
