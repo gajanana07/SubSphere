@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true, 
+      unique: true,
       lowercase: true,
     },
     password: {
@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
     googleId: {
       type: String,
       unique: true,
-      sparse: true, 
+      sparse: true,
     },
     authMethod: {
       type: String,
@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema(
     subscriptions: [subscriptionSchema],
   },
   {
-    timestamps: true, 
+    timestamps: true,
   }
 );
 
@@ -62,7 +62,7 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-// Method to Compare Passwords for Login 
+// Method to Compare Passwords for Login
 // This adds a helper method to each user document
 userSchema.methods.comparePassword = async function (candidatePassword) {
   // Securely compare the provided password with the hashed password in the database

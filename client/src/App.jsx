@@ -12,6 +12,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/Login";
 import DashboardPage from "./pages/DashboardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AboutHomePage from "./components/AboutHomePage";
 import img from "./assets/lin_img.jpeg";
 import sign from "./assets/name.png";
 
@@ -74,6 +75,7 @@ function App() {
       <Routes>
         {/* --- Public Routes --- */}
         <Route path="/" element={<HomePage />} />
+        <Route path="/homeabout" element={<AboutHomePage />} />
         <Route path="/login" element={<LoginPage />} />
 
         {/* --- Protected Routes --- */}

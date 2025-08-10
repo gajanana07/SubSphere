@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { serviceIcons } from "./ServiceIcons";
 import calender_logo from "../assets/calender_icon.png";
+import { gapi } from "gapi-script";
 
 const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
   const [formData, setFormData] = useState({
@@ -8,9 +9,9 @@ const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
     monthlyCost: "",
     nextBillDate: "",
     iconId: "default",
+    calendarEventId: null, // ✅ store Google event ID
   });
   const [calendarReminderSet, setCalendarReminderSet] = useState(false);
-
   const [isOtherService, setIsOtherService] = useState(false);
 
   const isEditMode = Boolean(subToEdit);
@@ -74,6 +75,7 @@ const SubscriptionModal = ({ isOpen, onClose, onSave, subToEdit }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // ✅ Create or Update Google Calendar event
   const handleAddToCalendar = () => {
     if (!formData.serviceName || !formData.nextBillDate) {
       alert("Please enter a service name and next bill date first.");
