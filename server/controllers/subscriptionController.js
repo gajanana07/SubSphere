@@ -1,6 +1,5 @@
 const User = require("../models/User");
 
-// getSubscriptions and addSubscription
 const getSubscriptions = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);

@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require("express"); //it simplifies building http apis compared to using the built in http module 
 const dotenv = require("dotenv");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -10,7 +10,7 @@ const subscriptionRoutes = require("./routes/subscriptionRoutes");
 // Load environment variables from .env file
 dotenv.config();
 
-const app = express();
+const app = express(); //start server
 
 // Middleware
 app.use(cors({ origin: "https://subsphere.netlify.app" }));
@@ -30,15 +30,8 @@ const connectDB = async () => {
 
 connectDB();
 
-// API Routes
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
-
-// All routes starting with /api/auth will be handled by authRoutes
+// All routes
 app.use("/api/auth", authRoutes);
-
-// All routes starting with /api/subscriptions will be handled by subscriptionRoutes
 app.use("/api/subscriptions", subscriptionRoutes);
 
 // Server starts

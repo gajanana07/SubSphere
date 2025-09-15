@@ -1,4 +1,3 @@
-
 const User = require("../models/User");
 const generateToken = require("../utils/generateToken");
 const { OAuth2Client } = require("google-auth-library");
@@ -6,9 +5,8 @@ const { OAuth2Client } = require("google-auth-library");
 // Initialize the Google Auth client with your Client ID from the .env file
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-// @desc    Register a new user
-// @route   POST /api/auth/register
-// @access  Public
+// Register a new user
+// POST /api/auth/register
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -40,9 +38,8 @@ const registerUser = async (req, res) => {
   }
 };
 
-// @desc    Authenticate user & get token
-// @route   POST /api/auth/login
-// @access  Public
+// Authenticate user & get token
+// POST /api/auth/login
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -68,9 +65,8 @@ const loginUser = async (req, res) => {
   }
 };
 
-// @desc    Authenticate with Google
-// @route   POST /api/auth/google
-// @access  Public
+// Authenticate with Google
+// POST /api/auth/google
 const authWithGoogle = async (req, res) => {
   const { credential } = req.body; // The token from Google sent by the frontend
 

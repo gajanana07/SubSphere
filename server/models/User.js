@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
-// This defines the structure for each individual subscription
+//for each subscription
 const subscriptionSchema = new mongoose.Schema({
   serviceName: { type: String, required: true },
   monthlyCost: { type: Number, required: true },
@@ -10,7 +10,7 @@ const subscriptionSchema = new mongoose.Schema({
   calendarReminderSet: { type: Boolean, default: false },
 });
 
-// This is the main schema
+//main schema
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -46,8 +46,7 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-//Mongoose Middleware to Hash Password Before Saving
-// This function runs automatically before a new user document is saved
+//Mongoose Middleware to Hash Password Before Saving(when "save" button is pressed)
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password") || this.authMethod !== "local") {
     return next();
@@ -63,7 +62,6 @@ userSchema.pre("save", async function (next) {
 });
 
 // Method to Compare Passwords for Login
-// This adds a helper method to each user document
 userSchema.methods.comparePassword = async function (candidatePassword) {
   // Securely compare the provided password with the hashed password in the database
   return await bcrypt.compare(candidatePassword, this.password);
