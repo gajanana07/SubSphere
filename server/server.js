@@ -13,8 +13,8 @@ dotenv.config();
 const app = express(); //start server
 
 // Middleware
-app.use(cors({ origin: "https://subsphere.netlify.app" }));
-//app.use(cors({ origin: "http://localhost:5173" }));
+//app.use(cors({ origin: "https://subsphere.netlify.app" }));
+app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
 
 // Database Connection

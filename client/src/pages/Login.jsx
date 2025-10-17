@@ -196,7 +196,7 @@ const Login = () => {
                   <input
                     name="name"
                     type="text"
-                    placeholder=""
+                    placeholder="John Doe"
                     onChange={handleInputChange}
                     required
                     className="bg-slate-700 border border-slate-600 rounded-md w-full py-3 pl-10 pr-4 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -218,7 +218,7 @@ const Login = () => {
                 <input
                   name="email"
                   type="email"
-                  placeholder=""
+                  placeholder="johndoe@gmail.com"
                   onChange={handleInputChange}
                   required
                   className="bg-slate-700 border border-slate-600 rounded-md w-full py-3 pl-10 pr-4 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -237,8 +237,9 @@ const Login = () => {
                   <PasswordIcon />
                 </div>
                 <input
+                  name="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder=""
+                  placeholder="*******"
                   onChange={handleInputChange}
                   required
                   className="bg-slate-700 border border-slate-600 rounded-md w-full py-3 pl-10 pr-4 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"

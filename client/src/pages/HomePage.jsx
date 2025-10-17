@@ -23,8 +23,8 @@ const HomePage = () => {
           <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl mx-auto">
             {/* Left Column*/}
             <div className="md:w-1/2 text-center md:text-left mb-12 md:mb-0">
-              <h1 className="text-4xl md:text-5xl font-bold text-slate-100 uppercase tracking-wider leading-tight mb-5">
-                Manage Your Subscriptions Easily with Subsphere
+              <h1 className="text-4xl md:text-5xl font-bold text-slate-100  tracking-wider leading-tight mb-5">
+                Manage Your Subscriptions Easily with Subsphere!
               </h1>
               <p className="text-lg text-slate-400 max-w-md mx-auto md:mx-0 mb-8">
                 Keep track of your recurring payments and never miss a bill
