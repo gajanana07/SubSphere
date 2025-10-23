@@ -49,7 +49,7 @@ const userSchema = new mongoose.Schema(
 //Mongoose Middleware to Hash Password Before Saving(when "save" button is pressed)
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password") || this.authMethod !== "local") {
-    return next();
+    return next();  
   }
 
   try {

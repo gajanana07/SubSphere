@@ -12,12 +12,11 @@ const { protect } = require("../middleware/authMiddleware");
 // A user must be logged in to access them.
 
 // Route for getting all subscriptions and adding a new one
-router.route("/").get(protect, getSubscriptions).post(protect, addSubscription);
+router.get("/", protect, getSubscriptions);
+router.post("/", protect, addSubscription);
 
 // Route for updating and deleting a specific subscription by its ID
-router
-  .route("/:id")
-  .put(protect, updateSubscription)
-  .delete(protect, deleteSubscription);
+router.put("/:id", protect, updateSubscription);
+router.delete("/:id", protect, deleteSubscription);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const express = require("express"); //it simplifies building http apis compared to using the built in http module 
 const dotenv = require("dotenv");
 const cors = require("cors");
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); //odm
 
 // Import routes
 const authRoutes = require("./routes/authRoutes");
@@ -13,8 +13,8 @@ dotenv.config();
 const app = express(); //start server
 
 // Middleware
-//app.use(cors({ origin: "https://subsphere.netlify.app" }));
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: "https://subsphere.netlify.app" }));
+//app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
 
 // Database Connection
